@@ -14,17 +14,15 @@ logging.basicConfig(
 
 class Liquidez():
     def __init__(self):
-        print("Inicializando programa...")
         """Run bot."""
         # Create the Updater and pass it your bot's token.
-        updater = Updater("TOKEN")
+        updater = Updater("2010600314:AAF-C06lmE-3xK9ai3RHm7b8WL-rwNawdfw")
 
         self.ativo = ""
         self.anterior_buy = 0.1
         self.anterior_sell = 0.1
 
         # Get the dispatcher to register handlers
-        print("Criando dispatcher...")
         dispatcher = updater.dispatcher
 
         # on different commands - answer in Telegram
@@ -33,8 +31,6 @@ class Liquidez():
         dispatcher.add_handler(CommandHandler("set", self.set_timer))
         dispatcher.add_handler(CommandHandler("unset", self.unset))
 
-        
-        print("Iniciando função polling...")
         # Start the Bot
         updater.start_polling()
 
@@ -42,7 +38,6 @@ class Liquidez():
         # Block until you press Ctrl-C or the process receives SIGINT, SIGTERM or
         # SIGABRT. This should be used most of the time, since start_polling() is
         # non-blocking and will stop the bot gracefully.
-        print("Iniciando função idle...")
         updater.idle()
 
 
@@ -63,13 +58,13 @@ class Liquidez():
         print(sell_list)
 
         if len(buy_list) != 0:
-            buy = max(buy_list)
+            buy = max(buy_list['Price'])
         else:
             buy = 0
             
             
         if len(sell_list) != 0:
-            sell = min(sell_list)
+            sell = min(sell_list['Price'])
         else:
             sell = 0
 
@@ -144,5 +139,4 @@ class Liquidez():
         update.message.reply_text(text)
 
 
-print("Antes de tudo!")
 Liquidez()
